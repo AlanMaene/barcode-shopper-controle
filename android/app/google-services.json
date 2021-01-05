@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "783369026640",
+    "firebase_url": "https://barcodescanner-7a3c0.firebaseio.com",
+    "project_id": "barcodescanner-7a3c0",
+    "storage_bucket": "barcodescanner-7a3c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783369026640:android:4c27550b8bccb685e96555",
+        "android_client_info": {
+          "package_name": "com.ap.barcodescanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrpcH_fxBl2unRb9ciQKQWJI29WWbEaIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783369026640:android:4175f814683c22b8e96555",
+        "android_client_info": {
+          "package_name": "com.example.barcode_shopper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783369026640-brc1896d3o0vui5sv731kdqs6o3f3drp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barcode_shopper",
+            "certificate_hash": "c6cd3f836a78c7ee15771718290181c083b7ab9a"
+          }
+        },
+        {
+          "client_id": "783369026640-fd201gmk3r53klqr7i4omi5q4oas945s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barcode_shopper",
+            "certificate_hash": "49b57b7ca983eff68100220994cffe60be393c60"
+          }
+        },
+        {
+          "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrpcH_fxBl2unRb9ciQKQWJI29WWbEaIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783369026640:android:3ca34e01086580e8e96555",
+        "android_client_info": {
+          "package_name": "com.example.barcode_shopper_controle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783369026640-jnamcjuref2k2b8t8o0miea733hj8d2d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barcode_shopper_controle",
+            "certificate_hash": "c6cd3f836a78c7ee15771718290181c083b7ab9a"
+          }
+        },
+        {
+          "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrpcH_fxBl2unRb9ciQKQWJI29WWbEaIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783369026640-ne72p1t6d3t443n4urc52k2l51ajvd6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
