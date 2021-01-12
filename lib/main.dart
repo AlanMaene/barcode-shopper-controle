@@ -65,7 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<Receipt> getReceipt(String receiptId) async{
     Receipt r;
-    await  FirebaseFirestore.instance.collection("users").doc("gFp1510RRM9AAniqccWq").collection("receipts").doc(receiptId).get().then((DocumentSnapshot documentSnapshot ) {
+    String guid = receiptId.substring(0,receiptId.length-26);
+    print(receiptId);
+    await  FirebaseFirestore.instance.collection("users").doc(guid.toString()).collection("receipts").doc(receiptId).get().then((DocumentSnapshot documentSnapshot ) {
        if (documentSnapshot.exists) {
          print("shop name: " + documentSnapshot.data()["shop name"]);
          r = Receipt(merchant:documentSnapshot.data()["merchant"],shopName: documentSnapshot.data()["shop name"],boughtItems: Item.decodeItems(documentSnapshot.data()["items"]),iid: receiptId );
@@ -115,16 +117,42 @@ class _MyHomePageState extends State<MyHomePage> {
     bool check = false;
     receipt.boughtItems.forEach((element) {
       if(element.iid == iid) {
+        bool isAlreadyScanned = false;
+        for(int i = 0 ; i < checkedItems.length ; i++){
+          if(checkedItems[i].iid == element.iid ){
+            isAlreadyScanned = true;
+            checkedItems[i].amount = checkedItems[i].amount+  1;
+            if(checkedItems[i].amount > element.amount){
+              checkedItems[i].inCart = false;
+            }
+          }; 
+        };
+        print(receipt);
+        
+        
         check = true;
-        Item temp = element;
-        temp.inCart = true;
-        checkedItems.add(temp);
+        if(isAlreadyScanned != true){
+          
+          Item temp = new Item(iid: element.iid, name: element.name, amount: 1, price: element.price, unit: "€", inCart: true, cumDiscount: element.cumDiscount,percentageDiscount: element.percentageDiscount,typeDiscount: element.typeDiscount);
+          checkedItems.add(temp);
+        }
+        
       }
     });
 
     if(check == false){
-      await this.getItem(iid, "Colruyt");
-      checkedItems.add(currentItem);
+      bool isAlreadyScanned = false;
+        for(int i = 0 ; i < checkedItems.length ; i++){
+          if(checkedItems[i].iid == iid ){
+            isAlreadyScanned = true;
+            checkedItems[i].amount += 1;
+          }; 
+        };
+      if(isAlreadyScanned != true){
+        await this.getItem(iid, "Colruyt");
+        checkedItems.add(currentItem);
+      }
+      
     }
 
     return check;
