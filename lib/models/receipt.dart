@@ -1,18 +1,28 @@
-import 'item.dart';
+
+import 'package:barcode_shopper_controle/models/item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class Receipt {
   List<Item> boughtItems; //veranderen door shoppinglist
   String shopName;
   int merchant;
-  DateTime payDate;
+  Timestamp payDate;
   String iid;
+  double totalDiscountSum;
+  double totalSum;
+  Timestamp shopEnterTime;
+  Timestamp shopExitTime;
 
   Receipt({
     @required this.boughtItems,
     @required this.shopName,
     @required this.merchant,
-    this.payDate,
+    @required this.totalDiscountSum,
+    @required this.totalSum,
+    @required this.shopEnterTime,
+    @required this.shopExitTime,
+    @required this.payDate,
     this.iid,
   });
 

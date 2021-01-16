@@ -105,6 +105,7 @@ class Item {
   }
 
   double getTotalPrice() {
+    checkDiscount();
     return (price * amount) - amountOfDiscount;
   }
 

@@ -62,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isItemInCart = false;
   List<Item> checkedItems = [];
   Item currentItem ;
+  double totalPriceChecked = 0;
 
   Future<Receipt> getReceipt(String receiptId) async{
     Receipt r;
@@ -113,6 +114,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return temp;
   }
 
+    Future<bool> saveReceipt() async {
+      String guid = receipt.iid.substring(0,receipt.iid.length-26);
+    List<String> itemsId = [];
+    for (int i = 0; i < receipt.boughtItems.length; i++) {
+      itemsId.add(receipt.boughtItems[i].toString());
+    }
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(guid)
+        .collection("receipts")
+        .doc(receipt.iid)
+        .set({
+      "merchant": receipt.merchant,
+      "shop name": receipt.shopName,
+      "date": receipt.payDate,
+      "items": Item.encodeItems(checkedItems),
+      "totalSum": receipt.totalSum,
+      "totalDiscountSum": receipt.totalDiscountSum,
+      "shopEnterTime": receipt.shopEnterTime,
+      "shopExitTime": receipt.shopExitTime
+    });
+
+    return true;
+  }
+
   Future<bool> isScanned(String iid) async{
     bool check = false;
     receipt.boughtItems.forEach((element) {
@@ -149,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
           }; 
         };
       if(isAlreadyScanned != true){
-        await this.getItem(iid, "Colruyt");
+        await this.getItem(iid, receipt.shopName);
         checkedItems.add(currentItem);
       }
       
@@ -157,6 +183,57 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return check;
   }
+
+  void editReceipt(){
+    totalPriceChecked = 0;
+    for(int i = 0 ; i < checkedItems.length ; i++){
+      totalPriceChecked += checkedItems[i].getTotalPrice();
+    }
+  
+
+    
+    print("verschil in prijs " + (totalPriceChecked - receipt.totalPrice()).toString());
+  }
+  Future<void> _showMyDialog() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Rekening aanpassen'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Het volgende bedrag moet de klant nog betalen'),
+              Text('' ),
+              Text('€'+(totalPriceChecked - receipt.totalPrice()).toStringAsFixed(2)),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Rekening wijzigen'),
+            onPressed: () {
+              saveReceipt();
+               result = "";
+                receipt;
+                receiptScanned = false;
+                isItemInCart = false;
+                checkedItems = [];
+                currentItem ;
+                totalPriceChecked = 0;
+              Navigator.pop(context);
+              setState(() {
+                
+              });
+              
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +321,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 48,
                         color: Colors.red,
                         textColor: Colors.white,
-                        onPressed: (){},
+                        onPressed: (){
+                          editReceipt();
+                          _showMyDialog();
+                        },
                       ),
                     ),
                   ]
